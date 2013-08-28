@@ -1,0 +1,66 @@
+{
+    "media": [
+        {
+            "defName": "TICK",
+            "type": "png",
+            "file": "images/Tempus Fugit TICK -White - 14 x 14.png"
+        },
+        {
+            "defName": "DOWN_ARROW",
+            "type": "png",
+            "file": "images/Tempus Fugit Arrow DOWN - White - 14 x 14.png"
+        },
+        {
+            "defName": "UP_ARROW",
+            "type": "png",
+            "file": "images/Tempus Fugit Arrow UP - White - 14 x 14.png"
+        },
+        {
+            "defName": "HOURGLASS_ZERO",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo - 0.png"
+        },
+        {
+            "defName": "HOURGLASS_ONE",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo - 1.png"
+        },
+        {
+            "defName": "HOURGLASS_TWO",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo - 2.png"
+        },
+        {
+            "defName": "HOURGLASS_THREE",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo - 3.png"
+        },
+        {
+            "defName": "IMAGE_MENU_ICON",
+            "type": "png",
+            "file": "images/menu_icon_TempusFugit.png"
+        },
+        {
+            "defName": "HOURGLASS_LARGE_ZERO",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo - LARGE - 0.png"
+        },
+        {
+            "defName": "HOURGLASS_LARGE_ONE",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo - LARGE - 1.png"
+        },
+        {
+            "defName": "HOURGLASS_LARGE_TWO",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo -LARGE - 2.png"
+        },
+        {
+            "defName": "HOURGLASS_LARGE_THREE",
+            "type": "png",
+            "file": "images/Tempus Fugit Logo - LARGE - 3.png"
+        }
+    ],
+    "friendlyVersion": "VERSION",
+    "versionDefName": "APP_RESOURCES"
+}
