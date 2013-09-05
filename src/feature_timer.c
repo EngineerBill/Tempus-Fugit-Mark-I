@@ -227,10 +227,10 @@ void feature_timer_update_fields() {
 	}
 	text_layer_set_text(&feature_timer_data.alertbuf_layer, feature_timer_data.alert_buffer);
 
-	if(tf_debugging) {
-		snprintf(feature_timer_data.msgs_buffer, 16, "stop: - %d", feature_timer_data.tick_count);
-		text_layer_set_text(&feature_timer_data.msgb_layer, feature_timer_data.msgs_buffer);  // create debug layer...
-	}
+//	if(tf_debugging) {
+//		snprintf(feature_timer_data.msgs_buffer, 16, "stop: - %d", feature_timer_data.tick_count);
+//		text_layer_set_text(&feature_timer_data.msgb_layer, feature_timer_data.msgs_buffer);  // create debug layer...
+//	}
 	
 }  // feature_timer_update_fields()
 
@@ -330,7 +330,7 @@ void feature_timer_tick() {
 
 
 // Now add new logo back to screen
-		layer_set_frame(&timer_logo_data.image_container[timer_logo_data.current_logo].layer.layer, GRect(8,60,40,46));
+		layer_set_frame(&timer_logo_data.image_container[timer_logo_data.current_logo].layer.layer, GRect(7,46,40,46));
 		layer_add_child(&tf_timer_window.layer, &timer_logo_data.image_container[timer_logo_data.current_logo].layer.layer);
 
 	}
@@ -546,7 +546,7 @@ void feature_timer_init(){
 		.unload = handle_unload,
     });
 
-	window_set_fullscreen(&tf_timer_window, true);	// remove top bar and replace with debug layer 
+//	window_set_fullscreen(&tf_timer_window, true);	// remove top bar and replace with debug layer 
 	window_set_background_color(&tf_timer_window, GColorWhite);
 	
 //  --------------------------------------
@@ -557,7 +557,7 @@ void feature_timer_init(){
 
 // init page logo animation
 	timer_logo_data.current_logo = 0;		// initialize logo tracking
-	layer_set_frame(&timer_logo_data.image_container[0].layer.layer, GRect(8,60,40,46));
+	layer_set_frame(&timer_logo_data.image_container[0].layer.layer, GRect(7,46,40,46));
 	layer_add_child(&tf_timer_window.layer, &timer_logo_data.image_container[0].layer.layer);
 	
 
@@ -578,9 +578,9 @@ void feature_timer_init(){
 	feature_timer_reset();		// clear running flag, clear counter & buffers
 	
 //  -----------------------------------------------------
-// set up "STOP WATCH" title buffer
+// set up "TIMER" title buffer
 //  -----------------------------------------------------
-	text_layer_init(&feature_timer_data.title_layer, GRect (2, 20, 140, 32));
+	text_layer_init(&feature_timer_data.title_layer, GRect (2, 2, 140, 32));
 	text_layer_set_text_alignment(&feature_timer_data.title_layer, GTextAlignmentCenter);
 	text_layer_set_text(&feature_timer_data.title_layer, feature_timer_data.title_label);
 	text_layer_set_background_color(&feature_timer_data.title_layer, GColorWhite);
@@ -597,7 +597,7 @@ void feature_timer_init(){
 	snprintf(feature_timer_data.count_buffer, 10, "%02d:%02d:%02d",  feature_timer_data.count_hour, feature_timer_data.count_minute, feature_timer_data.count_second);
 	text_layer_set_text(&feature_timer_data.countbuf_layer, feature_timer_data.count_buffer);
 
-	text_layer_init(&feature_timer_data.countbuf_layer, GRect (50, 62, 82, 32));
+	text_layer_init(&feature_timer_data.countbuf_layer, GRect (50, 48, 82, 32));
 	text_layer_set_text_alignment(&feature_timer_data.countbuf_layer, GTextAlignmentRight);
 	text_layer_set_text(&feature_timer_data.countbuf_layer, feature_timer_data.count_buffer);
 	text_layer_set_background_color(&feature_timer_data.countbuf_layer, GColorWhite);
@@ -606,7 +606,7 @@ void feature_timer_init(){
 	layer_add_child(&tf_timer_window.layer, &feature_timer_data.countbuf_layer.layer);
 
 // Function Label - "ALERT:"
-	text_layer_init(&feature_timer_data.alert_layer, GRect (4, 120, 52, 28));
+	text_layer_init(&feature_timer_data.alert_layer, GRect (4, 104, 52, 28));
 	text_layer_set_text(&feature_timer_data.alert_layer, feature_timer_data.alert_label);
 	text_layer_set_background_color(&feature_timer_data.alert_layer, GColorWhite);
 	text_layer_set_text_color(&feature_timer_data.alert_layer, GColorBlack);
@@ -614,7 +614,7 @@ void feature_timer_init(){
 	layer_add_child(&tf_timer_window.layer, &feature_timer_data.alert_layer.layer);
 
 // Set up ALERT count buffer
-	text_layer_init(&feature_timer_data.alertbuf_layer, GRect (56, 120, 86, 28));
+	text_layer_init(&feature_timer_data.alertbuf_layer, GRect (56, 104, 86, 28));
 	text_layer_set_text_alignment(&feature_timer_data.alertbuf_layer, GTextAlignmentRight);
 	text_layer_set_text(&feature_timer_data.alertbuf_layer, feature_timer_data.alert_buffer);
 	text_layer_set_background_color(&feature_timer_data.alertbuf_layer, GColorWhite);
@@ -623,14 +623,15 @@ void feature_timer_init(){
 	layer_add_child(&tf_timer_window.layer, &feature_timer_data.alertbuf_layer.layer);
 
 // set up header/debug msg buffer
-	text_layer_init(&feature_timer_data.msgb_layer, GRect (0, 0, 144, 18));
+/*
+text_layer_init(&feature_timer_data.msgb_layer, GRect (0, 0, 144, 18));
 	text_layer_set_text_alignment(&feature_timer_data.msgb_layer, GTextAlignmentCenter);
 	text_layer_set_text(&feature_timer_data.msgb_layer, feature_timer_data.msgs_buffer);
 	text_layer_set_background_color(&feature_timer_data.msgb_layer, GColorBlack);
 	text_layer_set_text_color(&feature_timer_data.msgb_layer, GColorWhite);
 	text_layer_set_font(&feature_timer_data.msgb_layer, norm14);
 	layer_add_child(&tf_timer_window.layer, &feature_timer_data.msgb_layer.layer);	
-
+*/
 // now update displayed fields
 	feature_timer_update_fields();
 

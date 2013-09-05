@@ -78,7 +78,7 @@ typedef struct {
 	TextLayer peopleb_layer;	//
 	TextLayer wagesb_layer;		//
 
-	TextLayer msgb_layer;		// used to display debug messages
+//	TextLayer msgb_layer;		// used to display debug messages
 
 // Window Attribute buffers
 	char time_label[6];			// "TIME:"
@@ -400,7 +400,7 @@ void feature_calc_tick() {
 		calc_logo_data.current_logo = (calc_logo_data.current_logo+1)%4;
 
 // Now add a new logo back to screen
-		layer_set_frame(&calc_logo_data.image_container[calc_logo_data.current_logo].layer.layer, GRect(5,20,40,46));
+		layer_set_frame(&calc_logo_data.image_container[calc_logo_data.current_logo].layer.layer, GRect(4,17,40,46));
 		layer_add_child(&tf_calc_window.layer, &calc_logo_data.image_container[calc_logo_data.current_logo].layer.layer);
 
 	}
@@ -610,7 +610,7 @@ void feature_calc_init(){
 		.unload = handle_unload,
     });
 
-	window_set_fullscreen(&tf_calc_window, true);		// remove top bar and replace with debug layer 
+//	window_set_fullscreen(&tf_calc_window, true);		// remove top bar and replace with debug layer 
 	window_set_background_color( &tf_calc_window, GColorWhite);
 	
 //  --------------------------------------
@@ -621,7 +621,7 @@ void feature_calc_init(){
 
 // init page logo animation
 	calc_logo_data.current_logo = 0;		// initialize logo tracking
-	layer_set_frame(&calc_logo_data.image_container[0].layer.layer, GRect(5,20,40,46));
+	layer_set_frame(&calc_logo_data.image_container[0].layer.layer, GRect(4,17,40,46));
 	layer_add_child(&tf_calc_window.layer, &calc_logo_data.image_container[0].layer.layer);
 	
 
@@ -643,7 +643,7 @@ void feature_calc_init(){
 // Set up Function labels ("TIME", "PEOPLE"" & "WAGES")
 //  -----------------------------------------------------
 // set up "TIME" label
-	text_layer_init(&feature_calc_data.time_layer, GRect (5, 72, 55, 28));
+	text_layer_init(&feature_calc_data.time_layer, GRect (5, 62, 55, 28));
 	text_layer_set_text(&feature_calc_data.time_layer, feature_calc_data.time_label);
 	text_layer_set_background_color(&feature_calc_data.time_layer, GColorWhite);
 	text_layer_set_text_color(&feature_calc_data.time_layer, GColorBlack);
@@ -651,7 +651,7 @@ void feature_calc_init(){
 	layer_add_child(&tf_calc_window.layer, &feature_calc_data.time_layer.layer);	
 
 // set up "PEOPLE" label
-	text_layer_init(&feature_calc_data.people_layer, GRect (5, 101, 70, 28));
+	text_layer_init(&feature_calc_data.people_layer, GRect (5, 91, 70, 28));
 	text_layer_set_text(&feature_calc_data.people_layer, feature_calc_data.people_label);
 	text_layer_set_background_color(&feature_calc_data.people_layer, GColorWhite);
 	text_layer_set_text_color(&feature_calc_data.people_layer, GColorBlack);
@@ -659,7 +659,7 @@ void feature_calc_init(){
 	layer_add_child(&tf_calc_window.layer, &feature_calc_data.people_layer.layer);	
 
 // set up "Wages" label
-	text_layer_init(&feature_calc_data.wages_layer, GRect (5, 130, 70, 28));
+	text_layer_init(&feature_calc_data.wages_layer, GRect (5, 120, 70, 28));
 	text_layer_set_text(&feature_calc_data.wages_layer, feature_calc_data.wages_label);
 	text_layer_set_background_color(&feature_calc_data.wages_layer, GColorWhite);
 	text_layer_set_text_color(&feature_calc_data.wages_layer, GColorBlack);
@@ -672,7 +672,7 @@ void feature_calc_init(){
 //  -----------------------------------------------------
 
 // set up COST buffer
-	text_layer_init(&feature_calc_data.costb_layer, GRect (42, 25, 92, 32));
+	text_layer_init(&feature_calc_data.costb_layer, GRect (50, 20, 92, 32));
 	text_layer_set_text_alignment(&feature_calc_data.costb_layer, GTextAlignmentRight);
 	text_layer_set_text(&feature_calc_data.costb_layer, feature_calc_data.cost_buffer);
 	text_layer_set_background_color(&feature_calc_data.costb_layer, GColorWhite);
@@ -681,7 +681,7 @@ void feature_calc_init(){
 	layer_add_child(&tf_calc_window.layer, &feature_calc_data.costb_layer.layer);	
 
 // TIME buffer
-	text_layer_init(&feature_calc_data.timeb_layer, GRect (63, 72, 73, 28));
+	text_layer_init(&feature_calc_data.timeb_layer, GRect (63, 62, 73, 28));
 	text_layer_set_text_alignment(&feature_calc_data.timeb_layer, GTextAlignmentRight);
 	text_layer_set_text(&feature_calc_data.timeb_layer, feature_calc_data.time_buffer);
 	text_layer_set_background_color(&feature_calc_data.timeb_layer, GColorWhite);
@@ -690,7 +690,7 @@ void feature_calc_init(){
 	layer_add_child(&tf_calc_window.layer, &feature_calc_data.timeb_layer.layer);
 
 // PEOPLE buffer
-	text_layer_init(&feature_calc_data.peopleb_layer, GRect (60, 101, 64, 28));
+	text_layer_init(&feature_calc_data.peopleb_layer, GRect (60, 91, 64, 28));
 	text_layer_set_text_alignment(&feature_calc_data.peopleb_layer, GTextAlignmentCenter);
 	text_layer_set_text(&feature_calc_data.peopleb_layer, feature_calc_data.people_buffer);
 	text_layer_set_background_color(&feature_calc_data.peopleb_layer, GColorWhite);
@@ -699,7 +699,7 @@ void feature_calc_init(){
 	layer_add_child(&tf_calc_window.layer, &feature_calc_data.peopleb_layer.layer);
 
 // WAGES buffer
-	text_layer_init(&feature_calc_data.wagesb_layer, GRect (60, 130, 76, 28));
+	text_layer_init(&feature_calc_data.wagesb_layer, GRect (60, 120, 76, 28));
 	text_layer_set_text_alignment(&feature_calc_data.wagesb_layer, GTextAlignmentRight);
 	text_layer_set_text(&feature_calc_data.wagesb_layer, feature_calc_data.wages_buffer);
 	text_layer_set_background_color(&feature_calc_data.wagesb_layer, GColorWhite);
@@ -709,14 +709,15 @@ void feature_calc_init(){
 
 
 // set up header/debug msg buffer
-	text_layer_init(&feature_calc_data.msgb_layer, GRect (0, 0, 144, 18));
+/*
+text_layer_init(&feature_calc_data.msgb_layer, GRect (0, 0, 144, 18));
 	text_layer_set_text_alignment(&feature_calc_data.msgb_layer, GTextAlignmentCenter);
 	text_layer_set_text(&feature_calc_data.msgb_layer, feature_calc_data.msgs_buffer);
 	text_layer_set_background_color(&feature_calc_data.msgb_layer, GColorBlack);
 	text_layer_set_text_color(&feature_calc_data.msgb_layer, GColorWhite);
 	text_layer_set_font(&feature_calc_data.msgb_layer, norm14);
 	layer_add_child(&tf_calc_window.layer, &feature_calc_data.msgb_layer.layer);	
-
+*/
 
 //  -----------------------------------------------------
 //      now init content buffers

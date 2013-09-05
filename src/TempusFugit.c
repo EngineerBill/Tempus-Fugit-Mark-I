@@ -1,6 +1,7 @@
 /* -------------------------------------------------------------------------------------- *\
 
-                      Tempus Fugit
+                  Tempus Fugit - Mark I
+					   (version 1.0)
 
 		    Calculating the True Cost of Business...
 
@@ -14,7 +15,9 @@
 
 		- Stopwatch:	adjustable alerts (defaults to 15 minutes)
 
-		- Timer:		adjustable alerts (defaults to 1 minute)
+		- Clock (Left)	Left handed analog watchface
+
+		- Clock (Right)	Right handed analog watchface
 
          -------------------------------------------
 			  

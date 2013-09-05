@@ -61,6 +61,56 @@ void page_about_show_page(){
 
 }  // page_about_show_page()
 
+
+// --------------------------------------------------------------------------
+//          click provider section
+// --------------------------------------------------------------------------
+
+// --------------------------------------------------------
+//			clicked_up()
+// --------------------------------------------------------
+static void clicked_up(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_up()
+
+
+// --------------------------------------------------------
+//			clicked_select()
+// --------------------------------------------------------
+static void clicked_select(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_select()
+
+
+// --------------------------------------------------------
+//			clicked_down()
+// --------------------------------------------------------
+static void clicked_down(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_down()
+
+// --------------------------------------------------------
+//			clicked_config_provider()
+// --------------------------------------------------------
+static void click_config_provider(ClickConfig **config, void* context) {
+     config[BUTTON_ID_UP]->click.handler = clicked_up;
+    config[BUTTON_ID_SELECT]->click.handler = clicked_select;
+   config[BUTTON_ID_DOWN]->click.handler = clicked_down;
+//    config[BUTTON_ID_SELECT]->long_click.handler = long_clicked_select;
+}
+
+// --------------------------------------------------------
+//			page_show-init()
+//
+// sets up Window with needed Layers, etc.
+// --------------------------------------------------------
+
 void page_about_init() {
 	window_init(&about_window, "About...");
 
@@ -71,6 +121,12 @@ void page_about_init() {
 //		.unload = handle_about_unload,
     });
 
+//  --------------------------------------
+// Set up window click handlers
+//  --------------------------------------
+	window_set_click_config_provider(&about_window, (ClickConfigProvider) click_config_provider);
+
+	
 //	window_set_fullscreen(&about_window, true);		// remove top bar and replace with debug layer 
 	window_set_background_color(&about_window, GColorBlack);
 

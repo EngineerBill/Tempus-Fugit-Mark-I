@@ -93,7 +93,7 @@ typedef struct {
 	TextLayer countbuf_layer;	// Stopwatch value buffers
 	TextLayer alertbuf_layer;	// (contains changing data)
 
-	TextLayer msgb_layer;		// used to display debug messages
+//	TextLayer msgb_layer;		// used to display debug messages
 
 // buffers to hold window labels
 	char title_label[15];		// "STOPWATCH", "- TIMER -", etc

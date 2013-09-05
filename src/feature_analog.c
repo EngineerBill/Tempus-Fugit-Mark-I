@@ -261,6 +261,48 @@ void date_update_proc(Layer* me, GContext* ctx) {
   text_layer_set_text(&s_data.num_label, s_data.num_buffer);
 
 }  // date_update_proc()
+// --------------------------------------------------------------------------
+//          click provider section
+// --------------------------------------------------------------------------
+
+// --------------------------------------------------------
+//			clicked_up()
+// --------------------------------------------------------
+static void clicked_up(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_up()
+
+
+// --------------------------------------------------------
+//			clicked_select()
+// --------------------------------------------------------
+static void clicked_select(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_select()
+
+
+// --------------------------------------------------------
+//			clicked_down()
+// --------------------------------------------------------
+static void clicked_down(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_down()
+
+// --------------------------------------------------------
+//			clicked_config_provider()
+// --------------------------------------------------------
+static void click_config_provider(ClickConfig **config, void* context) {
+     config[BUTTON_ID_UP]->click.handler = clicked_up;
+    config[BUTTON_ID_SELECT]->click.handler = clicked_select;
+   config[BUTTON_ID_DOWN]->click.handler = clicked_down;
+//    config[BUTTON_ID_SELECT]->long_click.handler = long_clicked_select;
+}
 
 // --------------------------------------------------------
 //             feature_analog_init()
@@ -274,7 +316,12 @@ void feature_analog_init() {
 
   // create clock window 
   window_init(&s_data.window, "SteamCab Analog");
- 
+ //  --------------------------------------
+// Set up window click handlers
+//  --------------------------------------
+//foobar - add memorable string to allow quick finds
+	window_set_click_config_provider(&s_data.window, (ClickConfigProvider) click_config_provider);
+
   // set up new Text Layer, hand paths, init layers, hands, etc
   // Change text here to customize for your needs... 
   strcpy(s_data.title_buffer, "SteamChest");	// Max buffer sizes are currently 9 chars & 5 chars!! 

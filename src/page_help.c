@@ -61,7 +61,7 @@ char stop_about_scroll_text[] = "Stopwatch:\nTraditional elapsed time function, 
 
 char timer_about_scroll_text[] = "Countdown Timer:\nTraditional interval timer function, with Alert capability (Buzzer vibrates twice every ALERT minutes, if set).";
 //char timer_help_scroll_text[] = "START/STOP toggles countdown timer (Note: you can still add or remove time with the UP/DOWN buttons while the timer is running).\nRESET stops the timer and clears the count.\nCLEAR sets the timer count to zero but does not stop it.\nBUTTONS allows you to specify which parameter is controlled by UP/DOWN buttons (available choices are COUNT or TIME).\n----------\n";
-char help_scroll_text[] = "START/STOP toggles timer (Note: you can still add or remove time with the UP/DOWN buttons while timer is running).\nRESET stops timer and clears the count.\nCLEAR sets timer count to zero but does not stop it.\nBUTTONS allows you to specify which parameter is controlled by UP/DOWN buttons.\n-----\n";
+char help_scroll_text[] = "START/STOP toggles timer (Note: you can still add or remove time with the UP/DOWN buttons while timer is running).\nRESET stops timer and sets count to zero.\nCLEAR sets timer count to zero but does not stop it.\nBUTTONS allows you to specify which parameter is controlled by UP/DOWN buttons.\n-----\n";
 
 //  Short form test here for debugging
 /*char program_scroll_text[] = "Tempus Fugit:\n";
@@ -172,6 +172,48 @@ static void handle_unload() {
 
 }  // handle_unload()
 
+// --------------------------------------------------------------------------
+//          click provider section
+// --------------------------------------------------------------------------
+
+// --------------------------------------------------------
+//			clicked_up()
+// --------------------------------------------------------
+static void clicked_up(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_up()
+
+
+// --------------------------------------------------------
+//			clicked_select()
+// --------------------------------------------------------
+static void clicked_select(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_select()
+
+
+// --------------------------------------------------------
+//			clicked_down()
+// --------------------------------------------------------
+static void clicked_down(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_down()
+
+// --------------------------------------------------------
+//			clicked_config_provider()
+// --------------------------------------------------------
+static void click_config_provider(ClickConfig **config, void* context) {
+//    config[BUTTON_ID_UP]->click.handler = clicked_up;
+    config[BUTTON_ID_SELECT]->click.handler = clicked_select;
+//    config[BUTTON_ID_DOWN]->click.handler = clicked_down;
+//    config[BUTTON_ID_SELECT]->long_click.handler = long_clicked_select;
+}
 
 // --------------------------------------------------------
 //		page_help_init()
@@ -179,6 +221,8 @@ static void handle_unload() {
 //  Called by TempusFugit.c when program is first init'ed
 // --------------------------------------------------------
 void page_help_init() {
+
+
 	window_init(&help_window, "Tempus Fugit Help");
 	window_set_window_handlers(&help_window, (WindowHandlers) {
 		.appear = handle_appear,
@@ -186,6 +230,7 @@ void page_help_init() {
 		.load = handle_load,
 		.unload = handle_unload,
   });
+
 
 	window_set_background_color(&help_window, GColorBlack);
 
@@ -195,10 +240,25 @@ const GRect max_text_bounds = GRect(0, 0, 144, 2000);
 // Initialize the scroll layer
 	scroll_layer_init(&scroll_layer, help_window.layer.bounds);
 
+//  --------------------------------------
+// Set up window click handlers
+//  --------------------------------------
+	
+ScrollLayerCallbacks overrideClbs = {
+	.click_config_provider = &click_config_provider,
+	.content_offset_changed_handler = NULL //Not interested.
+};
+//Call this to effectively set the overrideConfigProvider.
+//This overrideConfigProvider will be called in scroll_layer_set_click_config_onto_window().
+	scroll_layer_set_callbacks((ScrollLayer *)&scroll_layer, overrideClbs);
+
+
 // Now bind the scroll layer to the window so that up and down buttons
 // map to scrolling. You can choose to set up and use callbacks using
 // scroll_layer_set_callbacks to add or override interactivity
+
 	scroll_layer_set_click_config_onto_window(&scroll_layer, &help_window);
+
 
 // Set the scroll layer's max size
 	scroll_layer_set_content_size(&scroll_layer, max_text_bounds.size);
