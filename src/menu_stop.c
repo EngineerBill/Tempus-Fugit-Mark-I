@@ -224,7 +224,7 @@ int menu_count = 0;
 	menu_count = 0;
 
 	menu_stop_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
-		.title = "Buttons ->",
+		.title = "Button Mode ->",
 		.callback = menu_stop_buttons_callback,
 	};
 

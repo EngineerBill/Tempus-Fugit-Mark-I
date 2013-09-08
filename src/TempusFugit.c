@@ -92,7 +92,7 @@ Note: 1) Each module has a corresponding <module>.h file, which contains global
 #define MY_UUID {0x04, 0xB4, 0xA1, 0xF0, 0xFC, 0x56, 0x11, 0xE2, 0xB7, 0x78, 0x08, 0x00, 0x20, 0x0C, 0x9A, 0x66}
 
 PBL_APP_INFO(MY_UUID,
-             "TempusFugit - Mk I",
+             "Tempus Fugit",
              "SteamChest Chronicles",
              1, 0,
              RESOURCE_ID_IMAGE_MENU_ICON,	// this icon used in Pebble menu
@@ -111,6 +111,7 @@ PBL_APP_INFO(MY_UUID,
 #include "feature_stop.h"			//
 #include "feature_timer.h"			//
 #include "feature_analog.h"			//
+#include "feature_simplicity.h"		//
 
 #include "menu_program.h"			// menu module declares & function prototypes
 #include "menu_calc.h"				//
@@ -164,7 +165,7 @@ void handle_tick(AppContextRef ctx, PebbleTickEvent *t) {
 	feature_stop_tick();					// to individual functions
 	feature_timer_tick();					//
 	feature_analog_tick();					//
-
+	feature_simplicity_tick(ctx, t);				// this executes once per minute
 }
 
 // ----------------------------------------------------------------------------
@@ -273,6 +274,7 @@ void handle_init(AppContextRef ctx) {
 	feature_stop_init();				// init Stopwatch feature
 	feature_timer_init();				// init countdown Timer feature
 	feature_analog_init();				// init Analog Clock feature
+	feature_simplicity_init();				// init Analog Clock feature
 
 //   init various menu modules
 	menu_program_init();			// init program Home Page menu
@@ -311,7 +313,11 @@ void handle_deinit() {
 		bmp_deinit_container(&timer_logo_data.image_container[i]);
 		bmp_deinit_container(&page_start_logo_data.image_container[i]);
 	}
-	
+
+	for(int i=0; i<NUMBER_OF_ICONS; i++) {
+        bmp_deinit_container(&tf_icon_container[i]);
+	}
+
 // clean up any allocated resources on exit
 	menu_program_deinit();
 	feature_calc_deinit();

@@ -485,7 +485,7 @@ void feature_stop_init(){
 
 	GFont norm28 = fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD);
 	GFont norm24 = fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD);
-	GFont norm14 = fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD);
+//	GFont norm14 = fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD);
 
 	// ---------------------------------------
 	// Set up feature window handlers

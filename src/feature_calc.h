@@ -21,7 +21,7 @@
 #define CALC_DEFAULT_COUNT		0
 #define CALC_DEFAULT_TIME		15*60			// seems about right for a briefing...
 #define CALC_DEFAULT_PEOPLE		2				// minimum for a meeting, non?
-#define CALC_DEFAULT_WAGES		42				// $120k is average Silicon Valley programmer salary(!)
+#define CALC_DEFAULT_WAGES		100				// $120k is average Silicon Valley programmer salary(!)
 
 #define CALC_MAX_TIME			((24*60*60)-1)	// WARNING! product of these three
 #define CALC_MAX_PEOPLE			99				// can overflow signed int. This

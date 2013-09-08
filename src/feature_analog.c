@@ -226,15 +226,17 @@ void hands_update_proc(Layer* me, GContext* ctx) {
   gpath_draw_outline(ctx, &s_data.minute_arrow);
 
 	// Added for Left Handed Operation
+	//  TODO: bug in clockwise hour setting
 		if(left_handed) {
 		  	leftTime = 12 - t.tm_hour;
-		}
+			gpath_rotate_to(&s_data.hour_arrow, (TRIG_MAX_ANGLE * (((leftTime % 12) * 6) - (t.tm_min / 10))) / (12 * 6));
+ 		}
 		else {
 			leftTime = t.tm_hour;
-		}
+			gpath_rotate_to(&s_data.hour_arrow, (TRIG_MAX_ANGLE * (((leftTime % 12) * 6) + (t.tm_min / 10))) / (12 * 6));
+ 		}
 
 //  gpath_rotate_to(&s_data.hour_arrow, (TRIG_MAX_ANGLE * (((t.tm_hour % 12) * 6) + (t.tm_min / 10))) / (12 * 6));
-  gpath_rotate_to(&s_data.hour_arrow, (TRIG_MAX_ANGLE * (((leftTime % 12) * 6) - (t.tm_min / 10))) / (12 * 6));
   gpath_draw_filled(ctx, &s_data.hour_arrow);
   gpath_draw_outline(ctx, &s_data.hour_arrow);
 

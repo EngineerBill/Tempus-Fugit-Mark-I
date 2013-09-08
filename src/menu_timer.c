@@ -156,30 +156,30 @@ void menu_timer_cleanup() {
 // --------------------------------------------------------
 //			handle_appear()
 // --------------------------------------------------------
-void handle_appear(){
+//void handle_appear(){
 
-}  // handle_appear()
+//}  // handle_appear()
 	
 // --------------------------------------------------------
 //			handleu_disappear()
 // --------------------------------------------------------
-void handle_disappear(){
+//void handle_disappear(){
 
-}  // handle_appear()
+//}  // handle_appear()
 
 // --------------------------------------------------------
 //			handle_load()
 // --------------------------------------------------------
-void handle_load(){
+//void handle_load(){
 
-}  // handle_appear()
+//}  // handle_appear()
 	
 // --------------------------------------------------------
 //			handle_unload()
 // --------------------------------------------------------
-void handle_unload(){
+//void handle_unload(){
 
-}  // handle_unload()
+//}  // handle_unload()
 
 // --------------------------------------------------------
 //			menu_timer_init()
@@ -193,12 +193,13 @@ void menu_timer_init() {
 // -------------------------------
 	window_init(&menu_timer_window, "Timer Menu");
 	window_set_background_color(&menu_timer_window, GColorWhite);
-	window_set_window_handlers(&menu_timer_window, (WindowHandlers) {
-        .appear = (WindowHandler)handle_appear,
-        .disappear = (WindowHandler)handle_disappear,
- 		.load = handle_load,
-		.unload = handle_unload,
-    });
+//	window_set_window_handlers(&menu_timer_window, (WindowHandlers) {
+//        .appear = (WindowHandler)handle_appear,
+//        .disappear = (WindowHandler)handle_disappear,
+// 		.load = handle_load,
+//		.unload = handle_unload,
+//    }
+//);
 
 // -------------------------------
 // Initialize first menu section
@@ -223,7 +224,7 @@ int menu_count = 0;
 	menu_count = 0;
 
 	menu_timer_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
-		.title = "Buttons ->",
+		.title = "Button Mode ->",
 		.callback = menu_timer_buttons_callback,
 	};
 

@@ -18,7 +18,7 @@
 //			Module defines
 // ----------------------------------------------
 #define TIMER_DEFAULT_COUNT		60
-#define TIMER_DEFAULT_ALERT		 0
+#define TIMER_DEFAULT_ALERT		60
 
 
 

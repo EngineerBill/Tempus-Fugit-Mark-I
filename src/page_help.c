@@ -51,17 +51,17 @@ History:
 //    Edit Help Text here
 // ---------------------------
 
-char program_scroll_text[] = "Tempus Fugit:\nA light-hearted but hopefully useful App with Meeting Cost Calculator, Stopwatch, Countdown Timer & Analog Clock.\nSELECT brings up each function's control Menu.\nBUTTONS allows you to control UP/DOWN buttons for each function (see function HELP for more details).\n----\n----\n";
+char program_scroll_text[] = "SELECT brings up each function's control Menu.\nBUTTON MODE controls UP/DOWN buttons for each function (see function HELP for more details).\n----\n----\n";
 
-char calc_about_scroll_text[] = "Meeting Calculator:\nStatic or real time measurement of the cost of a meeting, based upon user-specified Number of Attendees, Estimated Average Salary and Elapsed Time.";
+char calc_about_scroll_text[] = "Meeting Calculator:\nMeasures of the cost of a meeting, based upon Attendee Count, Average Salary and Elapsed Time.";
 //char calc_help_scroll_text[] = "START/STOP toggles the calculation timer (Note: you can add or remove time with the UP/DOWN buttons while the timer is running).\nRESET stops the timer, clears count and restores defaults.\nCLEAR sets the timer count to zero but does not stop it.\nBUTTONS allows you to specify which parameter is controlled by UP/DOWN buttons (options are PEOPLE,WAGES or TIME).\n----------\n";
 
-char stop_about_scroll_text[] = "Stopwatch:\nTraditional elapsed time function, with Alert capability (Buzzer vibrates once every ALERT minutes, if set).";
+char stop_about_scroll_text[] = "Stopwatch:\nElapsed time function, with Alerts (Vibrates once per ALERT minutes, if set).";
 //char stop_help_scroll_text[] = "START/STOP toggles stopwatch timer (Note: you can still add or remove time with the UP/DOWN buttons while the timer is running).\nRESET stops the timer, clears count and restores defaults.\nCLEAR sets the timer count to zero but does not stop it.\nBUTTONS allows you to specify which parameter is controlled by UP/DOWN buttons (options are COUNT or TIME).\n----------\n";
 
-char timer_about_scroll_text[] = "Countdown Timer:\nTraditional interval timer function, with Alert capability (Buzzer vibrates twice every ALERT minutes, if set).";
+char timer_about_scroll_text[] = "Countdown Timer:\nInterval timer function, with Alerts (Vibrates twice every ALERT minutes, if set).";
 //char timer_help_scroll_text[] = "START/STOP toggles countdown timer (Note: you can still add or remove time with the UP/DOWN buttons while the timer is running).\nRESET stops the timer and clears the count.\nCLEAR sets the timer count to zero but does not stop it.\nBUTTONS allows you to specify which parameter is controlled by UP/DOWN buttons (available choices are COUNT or TIME).\n----------\n";
-char help_scroll_text[] = "START/STOP toggles timer (Note: you can still add or remove time with the UP/DOWN buttons while timer is running).\nRESET stops timer and sets count to zero.\nCLEAR sets timer count to zero but does not stop it.\nBUTTONS allows you to specify which parameter is controlled by UP/DOWN buttons.\n-----\n";
+char help_scroll_text[] = "START/STOP toggles timer (you can still add or remove time with the UP/DOWN buttons while timer is running).\nRESET stops timer and sets count to zero.\nCLEAR sets timer count to zero but does not stop it.\nBUTTON MODE controls which parameter is controlled by UP/DOWN buttons.\n";
 
 //  Short form test here for debugging
 /*char program_scroll_text[] = "Tempus Fugit:\n";

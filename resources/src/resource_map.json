@@ -1,6 +1,17 @@
 {
     "media": [
         {
+            "characterRegex": "[:0-9]",
+            "defName": "FONT_ROBOTO_BOLD_SUBSET_49",
+            "type": "font",
+            "file": "fonts/Roboto-Bold.ttf"
+        },
+        {
+            "defName": "FONT_ROBOTO_CONDENSED_21",
+            "type": "font",
+            "file": "fonts/Roboto-Bold.ttf"
+        },
+        {
             "defName": "TICK",
             "type": "png",
             "file": "images/Tempus Fugit TICK -White - 14 x 14.png"

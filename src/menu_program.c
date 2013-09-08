@@ -55,6 +55,7 @@ Possible Additional Future Program Menu Options:
 #include "feature_stop.h"			//
 #include "feature_timer.h"			//
 #include "feature_analog.h"			//
+#include "feature_simplicity.h"		//
 
 #include "page_about.h"				//
 #include "page_help.h"				//
@@ -76,15 +77,17 @@ static void menu_program_help_callback();
 static void menu_program_about_callback();
 
 	
-#define NUM_MENU_PROGRAM_SECTIONS		2
+#define NUM_MENU_PROGRAM_SECTIONS		3
 #define NUM_MENU_PROGRAM_FIRST_ITEMS	3
-#define NUM_MENU_PROGRAM_SECOND_ITEMS	4
+#define NUM_MENU_PROGRAM_SECOND_ITEMS	3
+#define NUM_MENU_PROGRAM_THIRD_ITEMS	2
 
 static struct TempusFugitProgramMenuData {
 	SimpleMenuLayer menu_layer;
 	SimpleMenuSection menu_sections[NUM_MENU_PROGRAM_SECTIONS];
 	SimpleMenuItem first_menu_items[NUM_MENU_PROGRAM_FIRST_ITEMS];
 	SimpleMenuItem second_menu_items[NUM_MENU_PROGRAM_SECOND_ITEMS];
+	SimpleMenuItem third_menu_items[NUM_MENU_PROGRAM_SECOND_ITEMS];
 } menu_program_data;
 
 
@@ -145,6 +148,12 @@ void menu_program_clock_right_callback() {
 
 	feature_analog_config(RIGHTHANDED, USESECONDS);
 	feature_analog_show_page();
+	
+}
+
+void menu_program_clock_simplicity_callback() {
+
+	feature_simplicity_show_window();
 	
 }
 
@@ -243,6 +252,11 @@ int menu_count = 0;
 //		.callback = menu_program_help_callback,
 //	};
 		menu_program_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+		.title = "Simplicity",
+		.callback = menu_program_clock_simplicity_callback,
+	};
+
+		menu_program_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "Clock (Left)",
 		.callback = menu_program_clock_left_callback,
 	};
@@ -252,12 +266,17 @@ int menu_count = 0;
 		.callback = menu_program_clock_right_callback,
 	};
 
-			menu_program_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	// -------------------------------
+	// Initialize third menu section
+	// -------------------------------
+	menu_count = 0;
+
+			menu_program_data.third_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "Help",
 		.callback = menu_program_help_callback,
 	};
 
-	menu_program_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	menu_program_data.third_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "About",
 		.callback = menu_program_about_callback,
 	};
@@ -276,6 +295,12 @@ int menu_count = 0;
 		.title = "(More...)",
 		.num_items = NUM_MENU_PROGRAM_SECOND_ITEMS,
 		.items = menu_program_data.second_menu_items,
+	};
+
+	menu_program_data.menu_sections[2] = (SimpleMenuSection) {
+		.title = "(More...)",
+		.num_items = NUM_MENU_PROGRAM_THIRD_ITEMS,
+		.items = menu_program_data.third_menu_items,
 	};
 
 	// -------------------------------

@@ -299,7 +299,7 @@ int menu_count = 0;
 	menu_calc_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
 //		.title = "Settings ->",
 //		.callback = menu_calc_settings_callback,
-		.title = "Buttons ->",
+		.title = "Button Mode ->",
 		.callback = menu_calc_buttons_callback,
 	};
 
