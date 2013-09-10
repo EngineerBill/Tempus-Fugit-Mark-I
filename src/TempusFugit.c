@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------------------- *\
 
                   Tempus Fugit - Mark I
-					   (version 1.0)
+					   (version 1.4)
 
 		    Calculating the True Cost of Business...
 
@@ -15,6 +15,10 @@
 
 		- Stopwatch:	adjustable alerts (defaults to 15 minutes)
 
+		- Timer:		Countdown timer with adjustable alerts (defaults to 1 minute)
+
+		- Sumplicity:	Sample digital watchface from the Pebble SDK
+
 		- Clock (Left)	Left handed analog watchface
 
 		- Clock (Right)	Right handed analog watchface
@@ -25,7 +29,7 @@
 	Date Created:		8/5/13
 	Last Update:		8/27/13
 	
-	Version:		Mark I (beta v0.1)
+	Version:		Mark I (beta v0.4)
 	
 				        (c) 2013,
 				    Steamchest Chronicles
@@ -94,7 +98,7 @@ Note: 1) Each module has a corresponding <module>.h file, which contains global
 PBL_APP_INFO(MY_UUID,
              "Tempus Fugit",
              "SteamChest Chronicles",
-             1, 0,
+             1, 1,
              RESOURCE_ID_IMAGE_MENU_ICON,	// this icon used in Pebble menu
              APP_INFO_STANDARD_APP			// tells OS this is not a watchface
 			 								// so e.g. we can get button events

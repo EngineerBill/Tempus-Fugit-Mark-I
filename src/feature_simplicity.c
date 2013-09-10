@@ -2,10 +2,19 @@
 #include "pebble_app.h"
 #include "pebble_fonts.h"
 
-#include "feature_simplicity.h"
+#include "feature_simplicity.h"		// added during conversion to Tempus feature
 
+
+// ------------------------------------------------------------
+//  original Watchface UUID
+// ------------------------------------------------------------
 //#define MY_UUID {0xA4, 0x1B, 0xB0, 0xE2, 0xD2, 0x62, 0x4E, 0xA6, 0xAA, 0x30, 0xED, 0xBE, 0x01, 0xE3, 0x8A, 0x02}
 //PBL_APP_INFO(MY_UUID, "Simplicity", "Pebble Technology", 3, 0 /* App version */, RESOURCE_ID_IMAGE_MENU_ICON, APP_INFO_WATCH_FACE);
+
+	
+// ------------------------------------------------------------
+//    local declares
+// ------------------------------------------------------------
 
 static Window window;
 
@@ -16,15 +25,25 @@ static Layer line_layer;
 
 static int tick_count = 0;
 
-// -------------------------------------------------------
+// ------------------------------------------------------------
 //     public functions
-// -------------------------------------------------------
+// ------------------------------------------------------------
+// --------------------------------------------------
+//  feature_simplicity_show_window()
+//
+//       Called from main program menu
+//         to show feature window
+// --------------------------------------------------
 void feature_simplicity_show_window(){
 
   window_stack_push(&window, true /* Animated */);
 
 }  // feature_simplicity_show_window()
 
+
+// ------------------------------------------------------------
+//     original watchface functions
+// ------------------------------------------------------------ 
 static void line_layer_update_callback(Layer *me, GContext* ctx) {
 
   graphics_context_set_stroke_color(ctx, GColorWhite);
@@ -68,12 +87,61 @@ char *time_format;
 	}
 }  // feature_simplicifty_tick()
 
+// --------------------------------------------------------------------------
+//          click provider section
+// --------------------------------------------------------------------------
+
+// --------------------------------------------------------
+//			clicked_up()
+// --------------------------------------------------------
+static void clicked_up(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_up()
+
+
+// --------------------------------------------------------
+//			clicked_select()
+// --------------------------------------------------------
+static void clicked_select(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_select()
+
+
+// --------------------------------------------------------
+//			clicked_down()
+// --------------------------------------------------------
+static void clicked_down(ClickRecognizerRef recognizer, void *context) {
+
+	window_stack_pop(true);			// & return
+
+}  // clicked_down()
+
+// --------------------------------------------------------
+//			clicked_config_provider()
+// --------------------------------------------------------
+static void click_config_provider(ClickConfig **config, void* context) {
+     config[BUTTON_ID_UP]->click.handler = clicked_up;
+    config[BUTTON_ID_SELECT]->click.handler = clicked_select;
+   config[BUTTON_ID_DOWN]->click.handler = clicked_down;
+//    config[BUTTON_ID_SELECT]->long_click.handler = long_clicked_select;
+}
 // ---------------------------------------------------------------------
+//  init()/deinit() routines adapted during conversion
+//
+//       Called from TempusFugit.c
 //
 // ---------------------------------------------------------------------
 void feature_simplicity_init(AppContextRef ctx) {
 
   window_init(&window, "Simplicity");
+ //  ------------------------------------------------------
+//   Set up window click handlers (Added for Tempus Fugit)
+ //  ------------------------------------------------------
+  window_set_click_config_provider(&window, (ClickConfigProvider) click_config_provider);
 
   window_set_background_color(&window, GColorBlack);
 

@@ -251,10 +251,6 @@ int menu_count = 0;
 //		.title = "Salaries",
 //		.callback = menu_program_help_callback,
 //	};
-		menu_program_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
-		.title = "Simplicity",
-		.callback = menu_program_clock_simplicity_callback,
-	};
 
 		menu_program_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "Clock (Left)",
@@ -266,6 +262,10 @@ int menu_count = 0;
 		.callback = menu_program_clock_right_callback,
 	};
 
+		menu_program_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+		.title = "Simplicity",
+		.callback = menu_program_clock_simplicity_callback,
+	};
 	// -------------------------------
 	// Initialize third menu section
 	// -------------------------------
@@ -287,18 +287,19 @@ int menu_count = 0;
 	//  corresponding menu sections
 	// -------------------------------
 	menu_program_data.menu_sections[0] = (SimpleMenuSection) {
+		.title = "(Timers...)",
 		.num_items = NUM_MENU_PROGRAM_FIRST_ITEMS,
 		.items = menu_program_data.first_menu_items,
 	};
 
 	menu_program_data.menu_sections[1] = (SimpleMenuSection) {
-		.title = "(More...)",
+		.title = "(Watchfaces...)",
 		.num_items = NUM_MENU_PROGRAM_SECOND_ITEMS,
 		.items = menu_program_data.second_menu_items,
 	};
 
 	menu_program_data.menu_sections[2] = (SimpleMenuSection) {
-		.title = "(More...)",
+		.title = "(Misc...)",
 		.num_items = NUM_MENU_PROGRAM_THIRD_ITEMS,
 		.items = menu_program_data.third_menu_items,
 	};

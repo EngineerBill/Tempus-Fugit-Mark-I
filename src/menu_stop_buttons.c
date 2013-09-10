@@ -8,6 +8,11 @@
 	
 	Note:	This is essentially identical to the menu_timer_buttons.c
 			module. See that file for detailed comments.
+			("So why are they separate?" I hear you cry - By keeping
+			each module stand-alone they are hopefully easier to follow
+			and/or modify/coopt for other projects. If you need to 
+			recover space you can consider merging the multiple menu
+			routines and/or the multiple Action Bar routines to save space...
 
    ----------------------------------------------------------------
 	Author:				Peter Deutsch (engineerbill@stemchest.com)

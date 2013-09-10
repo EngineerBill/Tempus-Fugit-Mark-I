@@ -18,9 +18,9 @@
 		RESET			- stops timer, resets Alert and Counter
 		CLEAR			- clears tick counter, does not stop count
 
-		Buttons			- invokes Action Bar menu to select
-						  Timer button function (can change count
-						  or Alert)
+		Button Mode		- invokes Action Bar menu to select
+						  Timer button function (can change
+						  Count or Alert)
 						  
 		Help			- Context-sensitive Help page
 		About			- Brief description of the module's function	
@@ -59,16 +59,16 @@ static void handle_unload();
 // --------------------------------------------------------
 //  local module defines and variable definitions
 // --------------------------------------------------------
-#define NUM_MENU_STOP_SECTIONS 2
-#define NUM_MENU_STOP_FIRST_ITEMS 3
-#define NUM_MENU_STOP_SECOND_ITEMS 3
+#define NUM_MENU_STOP_SECTIONS 1
+#define NUM_MENU_STOP_FIRST_ITEMS 6
+//#define NUM_MENU_STOP_SECOND_ITEMS 3
 //#define NUM_MENU_STOP_THIRD_ITEMS 1
 
 static struct TempusFugitStopMenuData {
 	SimpleMenuLayer menu_layer;
 	SimpleMenuSection menu_sections[NUM_MENU_STOP_SECTIONS];
 	SimpleMenuItem first_menu_items[NUM_MENU_STOP_FIRST_ITEMS];
-	SimpleMenuItem second_menu_items[NUM_MENU_STOP_SECOND_ITEMS];
+//	SimpleMenuItem second_menu_items[NUM_MENU_STOP_SECOND_ITEMS];
 //	SimpleMenuItem third_menu_items[NUM_MENU_STOP_THIRD_ITEMS];
 } menu_stop_data;
 
@@ -205,35 +205,33 @@ void menu_stop_init() {
 // Initialize first menu section
 // -------------------------------
 int menu_count = 0;
+
 	menu_stop_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "START/STOP",
 		.callback = menu_stop_start_callback,
 	};
+
 	menu_stop_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "RESET",
 		.callback = menu_stop_reset_callback,
 	};	
+
 	menu_stop_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "CLEAR",
 		.callback = menu_stop_clear_callback,
 	};
 
-	// -------------------------------
-	// Initialize second menu section
-	// -------------------------------
-	menu_count = 0;
-
-	menu_stop_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	menu_stop_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "Button Mode ->",
 		.callback = menu_stop_buttons_callback,
 	};
 
-	menu_stop_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	menu_stop_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "Help ->",
 		.callback = menu_stop_help_callback,
 	};
 
-	menu_stop_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	menu_stop_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "About ->",
 		.callback = menu_stop_about_callback,
 	};
@@ -261,11 +259,11 @@ int menu_count = 0;
 		.num_items = NUM_MENU_STOP_FIRST_ITEMS,
 		.items = menu_stop_data.first_menu_items,
 	};
-	menu_stop_data.menu_sections[1] = (SimpleMenuSection) {
-		.title = "(More...)",
-		.num_items = NUM_MENU_STOP_SECOND_ITEMS,
-		.items = menu_stop_data.second_menu_items,
-	};
+//	menu_stop_data.menu_sections[1] = (SimpleMenuSection) {
+//		.title = "(More...)",
+//		.num_items = NUM_MENU_STOP_SECOND_ITEMS,
+//		.items = menu_stop_data.second_menu_items,
+//	};
 //	menu_stop_data.menu_sections[2] = (SimpleMenuSection) {
 //		.num_items = NUM_MENU_STOP_THIRD_ITEMS,
 //		.items = menu_stop_data.third_menu_items,

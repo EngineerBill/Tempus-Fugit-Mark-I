@@ -280,7 +280,7 @@ void page_start_init(){
 
 	text_layer_init(&version_layer, GRect (28, 137, 90, 20));
 	text_layer_set_text_alignment(&version_layer, GTextAlignmentCenter);
-	text_layer_set_text(&version_layer, "- beta 0.2");
+	text_layer_set_text(&version_layer, "- beta 0.4");
 	text_layer_set_background_color(&version_layer, GColorBlack);
 	text_layer_set_text_color(&version_layer, GColorWhite);
 	text_layer_set_font(&version_layer, norm18);

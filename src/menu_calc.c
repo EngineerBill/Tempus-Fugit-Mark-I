@@ -8,18 +8,18 @@
 
    ----------------------------------------------------------------
 	Author:				Peter Deutsch (engineerbill@stemchest.com)
-	Date Created:		8/16/13
-	Last Update:		8/16/13
+	Date Created:		8/16/13   - Created for Tempus Fugit
+	Modified:			9/10/13   - Changed menu order, relabled
    ----------------------------------------------------------------
 
 	Main Menu Commands:
+		Button Mode		- invokes Action Bar menu to select
+						  one of: People | Wages | Time
+						 
 		START/STOP		- timer controls
 		RESET			- stops timer, resets Alert and Counter
 		CLEAR			- clears tick counter, does not stop count
 
-		Buttons			- invokes Action Bar menu to select
-						  one of: People | Wages | Time
-						 
 		Help			- Context-sensitive Help page
 		About			- Brief description of the module's function	
    
@@ -117,16 +117,16 @@ static void menu_calc_help_callback();
 //  local module defines and variable definitions
 // --------------------------------------------------------
 //#define NUM_MENU_CALC_SECTIONS 3	// uncomment to add a third section
-#define NUM_MENU_CALC_SECTIONS 2
-#define NUM_MENU_CALC_FIRST_ITEMS 3
-#define NUM_MENU_CALC_SECOND_ITEMS 3
+#define NUM_MENU_CALC_SECTIONS 1
+#define NUM_MENU_CALC_FIRST_ITEMS 6
+//#define NUM_MENU_CALC_SECOND_ITEMS 3
 //#define NUM_MENU_CALC_THIRD_ITEMS 1
 
 static struct TempusFugitMainMenuData {
 	SimpleMenuLayer menu_layer;
 	SimpleMenuSection menu_sections[NUM_MENU_CALC_SECTIONS];
 	SimpleMenuItem first_menu_items[NUM_MENU_CALC_FIRST_ITEMS];
-	SimpleMenuItem second_menu_items[NUM_MENU_CALC_SECOND_ITEMS];
+//	SimpleMenuItem second_menu_items[NUM_MENU_CALC_SECOND_ITEMS];
 //	SimpleMenuItem third_menu_items[NUM_MENU_CALC_THIRD_ITEMS];
 } menu_calc_data;
 
@@ -277,6 +277,7 @@ void menu_calc_init() {
 // Initialize first menu section
 // -------------------------------
 int menu_count = 0;
+
 	menu_calc_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 		.title = "START/STOP",
 		.callback = menu_calc_start_callback,
@@ -292,25 +293,21 @@ int menu_count = 0;
 		.callback = menu_calc_clear_callback,
 	};
 
-	// -------------------------------
-	// Initialize second menu section
-	// -------------------------------
-	menu_count = 0;
-	menu_calc_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	menu_calc_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 //		.title = "Settings ->",
 //		.callback = menu_calc_settings_callback,
 		.title = "Button Mode ->",
 		.callback = menu_calc_buttons_callback,
 	};
 
-	menu_calc_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	menu_calc_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 //		.title = "Settings ->",
 //		.callback = menu_calc_settings_callback,
 		.title = "Help ->",
 		.callback = menu_calc_help_callback,
 	};
 
-	menu_calc_data.second_menu_items[menu_count++] = (SimpleMenuItem) {
+	menu_calc_data.first_menu_items[menu_count++] = (SimpleMenuItem) {
 //		.title = "Settings ->",
 //		.callback = menu_calc_settings_callback,
 		.title = "About ->",
@@ -341,11 +338,11 @@ int menu_count = 0;
 		.items = menu_calc_data.first_menu_items,
 	};
 
-	menu_calc_data.menu_sections[1] = (SimpleMenuSection) {
-		.title = "(More...)",
-		.num_items = NUM_MENU_CALC_SECOND_ITEMS,
-		.items = menu_calc_data.second_menu_items,
-	};
+//	menu_calc_data.menu_sections[1] = (SimpleMenuSection) {
+//		.title = "(More...)",
+//		.num_items = NUM_MENU_CALC_SECOND_ITEMS,
+//		.items = menu_calc_data.second_menu_items,
+//	};
 	
 //	menu_calc_data.menu_sections[2] = (SimpleMenuSection) {
 //		.num_items = NUM_MENU_CALC_THIRD_ITEMS,

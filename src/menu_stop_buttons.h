@@ -2,7 +2,7 @@
 
                       menu_stop_buttons.h
 
-	Header file for Tempus Fugit TStopwatch Action Bar Menu Module
+	Header file for Tempus Fugit Stopwatch Action Bar Menu Module
 
   Use:	Include this header file in any module that needs to access
 		The Action Bar Menu public functions.

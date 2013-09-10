@@ -2,7 +2,7 @@
 
                       feature_analog_globals.h
 
-	    Global defines for Tempus Fugit Analog Clock feature
+	    Original global defines for Tempus Fugit Analog Clock feature
 
 	Note: Include once in feature_anlaog.c
 			

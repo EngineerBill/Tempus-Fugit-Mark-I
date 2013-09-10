@@ -5,7 +5,7 @@
 	Implements Tempus Fugit Timer function Action Bar menu. 
 	
 	Menu buttons select option.
-    Creations Action Bar layer to allow user to select either COUNT or ALERT.
+    Creates and Action Bar layer to allow user to select either COUNT or ALERT.
 	This in turn determines whether the UP/DOWN buttons in the Timer function
 	increment/decrement the elapsed time count or the ALERT setting.
 	
