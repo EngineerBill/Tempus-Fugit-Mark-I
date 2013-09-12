@@ -1,6 +1,21 @@
 {
     "media": [
         {
+            "defName": "HOURGLASS_LARGE_SIX",
+            "type": "png",
+            "file": "images/TempusFugit - page icon - REWORKED - LARGE- 6.png"
+        },
+        {
+            "defName": "HOURGLASS_LARGE_FIVE",
+            "type": "png",
+            "file": "images/TempusFugit - page icon - REWORKED - LARGE- 5.png"
+        },
+        {
+            "defName": "HOURGLASS_LARGE_FOUR",
+            "type": "png",
+            "file": "images/TempusFugit - page icon - REWORKED - LARGE - 4.png"
+        },
+        {
             "characterRegex": "[:0-9]",
             "defName": "FONT_ROBOTO_BOLD_SUBSET_49",
             "type": "font",

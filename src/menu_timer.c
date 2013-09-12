@@ -50,10 +50,10 @@
 // --------------------------------------------------------
 //  declare private function protoypes
 // --------------------------------------------------------
-static void handle_appear();
-static void handle_disappear();
-static void handle_load();
-static void handle_unload();
+//static void handle_appear();
+//static void handle_disappear();
+//static void handle_load();
+//static void handle_unload();
 
 
 // --------------------------------------------------------

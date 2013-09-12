@@ -31,16 +31,22 @@
 // -----------------------------------
 //    Array of animation logos
 // -----------------------------------
+// animation for feature pages
 int IMAGE_RESOURCE_IDS[NUMBER_OF_IMAGES] = {
 	RESOURCE_ID_HOURGLASS_ZERO, RESOURCE_ID_HOURGLASS_ONE,
 	RESOURCE_ID_HOURGLASS_TWO, RESOURCE_ID_HOURGLASS_THREE
 };
 
-int IMAGE_RESOURCE_LARGE_IDS[NUMBER_OF_IMAGES] = {
+
+// animation for opening splash page
+int IMAGE_RESOURCE_LARGE_IDS[NUMBER_OF_LARGE_IMAGES] = {
 	RESOURCE_ID_HOURGLASS_LARGE_ZERO, RESOURCE_ID_HOURGLASS_LARGE_ONE,
-	RESOURCE_ID_HOURGLASS_LARGE_TWO, RESOURCE_ID_HOURGLASS_LARGE_THREE
+	RESOURCE_ID_HOURGLASS_LARGE_TWO, RESOURCE_ID_HOURGLASS_LARGE_THREE,
+	RESOURCE_ID_HOURGLASS_LARGE_FOUR, RESOURCE_ID_HOURGLASS_LARGE_FIVE,
+	RESOURCE_ID_HOURGLASS_LARGE_SIX
 };
 
+// icons for Action Bar menus
 int IMAGE_RESOURCE_ICONS[NUMBER_OF_ICONS] = {
 	RESOURCE_ID_UP_ARROW, RESOURCE_ID_TICK, RESOURCE_ID_DOWN_ARROW
 };
@@ -49,13 +55,13 @@ int IMAGE_RESOURCE_ICONS[NUMBER_OF_ICONS] = {
 //        Create global animation structures
 //  Note: currently one per window.
 //  TODO: convert to a single global function
-//        to eliminate redundency
+//        to eliminate redundency/reduce space
 // --------------------------------------------------------
 // TODO: can shrink code by making this one set
 TempusFugitLogoData calc_logo_data;			// Logo Animation data structures
 TempusFugitLogoData stop_logo_data;			//
 TempusFugitLogoData timer_logo_data;		//
-TempusFugitLogoData page_start_logo_data;	//
+TempusFugitLargeLogoData page_start_logo_data;	//
 
 // -----------------------------------
 //    Global Logo Animation vars

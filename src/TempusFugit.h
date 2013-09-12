@@ -21,6 +21,9 @@
 //		Public program declares
 // ----------------------------------------------
 
+#define PROGRAM_VERSION "- beta 0.5"	// used to track version (e.g. on splash page)
+
+	
 // Feature defines used e.g. when calling 
 // context sensitive help function
 #define PROGRAM				0
@@ -64,7 +67,8 @@
 //#define SETTING_WINDOW		 10	// to come
 
 
-#define NUMBER_OF_IMAGES		4
+#define NUMBER_OF_IMAGES			4
+#define NUMBER_OF_LARGE_IMAGES		7
 extern int IMAGE_RESOURCE_IDS[];
 extern int IMAGE_RESOURCE_LARGE_IDS[];
 
@@ -81,7 +85,13 @@ typedef struct {
 	Layer animation_layer;							// logo slideshow layer
 	BmpContainer image_container[NUMBER_OF_IMAGES];	// logo container
 	int current_logo;								// tracks which is active aswe cycle
-} TempusFugitLogoData;
+} TempusFugitLogoData;// Provides logo animation data for each feature window
+
+typedef struct {
+	Layer animation_layer;							// logo slideshow layer
+	BmpContainer image_container[NUMBER_OF_LARGE_IMAGES];	// logo container
+	int current_logo;								// tracks which is active aswe cycle
+} TempusFugitLargeLogoData;
 
 typedef struct {
 // Window TextLayers
@@ -125,7 +135,7 @@ typedef struct {
 extern TempusFugitLogoData calc_logo_data;			// small logos (for feature pages)		
 extern TempusFugitLogoData stop_logo_data;			// 		
 extern TempusFugitLogoData timer_logo_data;			// 		
-extern TempusFugitLogoData page_start_logo_data;	// large logo (for splash page)
+extern TempusFugitLargeLogoData page_start_logo_data;	// large logo (for splash page)
 
 extern BmpContainer tf_icon_container[];  			// holds Action Bar icons
 

@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------------------- *\
 
                   Tempus Fugit - Mark I
-					   (version 1.4)
+					   (version 1.5)
 
 		    Calculating the True Cost of Business...
 
@@ -17,17 +17,18 @@
 
 		- Timer:		Countdown timer with adjustable alerts (defaults to 1 minute)
 
-		- Sumplicity:	Sample digital watchface from the Pebble SDK
-
 		- Clock (Left)	Left handed analog watchface
 
 		- Clock (Right)	Right handed analog watchface
+
+		- Simplicity:	Sample digital watchface from the Pebble SDK
 
          -------------------------------------------
 			  
 	Author:				Peter Deutsch (engineerbill@stemchest.com)
 	Date Created:		8/5/13
-	Last Update:		8/27/13
+	Last Update:		9/11/13
+	
 	
 	Version:		Mark I (beta v0.4)
 	
@@ -47,29 +48,35 @@
 
 Implementation Plan:
 
-	1)(done) Implement Program Menu (TempusFugit.c, menu_program.c)
+	1)  (done) Implement Program Menu (TempusFugit.c, menu_program.c)
 
-	2) (done) Implement Calculator (feature_calc.c)
+	2)  (done) Implement Calculator (feature_calc.c)
 	
-	3) (done) Implement Calculator Menus (menu_calc.c & menu_calc_buttons.c)
+	3)  (done) Implement Calculator Menus (menu_calc.c & menu_calc_buttons.c)
 	
-	4) (done) Implement About/Help menus (page_about.c, page_help.c)
+	4)  (done) Implement About/Help menus (page_about.c, page_help.c)
 	
-	5) (done) Implement Animated Start Page (page_start.c)
+	5)  (done) Implement Animated Start Page (page_start.c)
 	
-	6) (done) Implement Stopwatch window (feature_stop.c)
+	6)  (done) Implement Stopwatch window (feature_stop.c)
 
-	7) (done) Implement Stopwatch Menu windows (menu_stop.c & menu_stop_buttons.c)
+	7)  (done) Implement Stopwatch Menu windows (menu_stop.c & menu_stop_buttons.c)
 
-	7) (done) Implement Timer window (feature_timer.c)
+	7)  (done) Implement Timer window (feature_timer.c)
 
-	7) (done) Implement Stopwatch Menu window (menu_timer.c & menu_timer_buttons.c)
+	7)  (done) Implement Stopwatch Menu window (menu_timer.c & menu_timer_buttons.c)
 
-	8) Implement Analog watchface
+	8)  (done) Implement SImple Analog watchface (Left & Right handed)
 	
-	9) (in progress) document and release...
+	9)  (done) Implement Simplicity Digital watchface
+	
+	10) (done) Move Splash page code to page_start.c
+	
+	11) (in progress) document and release...
 
-Note: 1) Each module has a corresponding <module>.h file, which contains global
+Notes:
+
+	1) Each module has a corresponding <module>.h file, which contains global
       function prototypes and declares. This can be safely included in any other
 	  module that needs them (for example, to be able to call a public function).
 
@@ -128,33 +135,7 @@ PBL_APP_INFO(MY_UUID,
 #include "page_help.h"				// 
 #include "page_about.h"				// 
 
-// ----------------------------------
-// used to animate start page
-// ----------------------------------
-#define TF_TIMER_INTERVAL		400		// default splash page ticks to 500 milliseconds
-	
-static AppTimerHandle tf_timer;			// system app timer struct
 
-static int tf_tick_count = 0;			// splash page counter tracks next icon to show
-
-static bool tf_splash_done = false;		// flag to indicate splash page done
-static bool tf_skip_start = false;		// flag to indicate user elected to skip splash page
-
-static void  finish_splash_page();		// helper function to clean up when animation done
-
-
-// ----------------------------------------------------------------------------
-//			tf_skip_start_page()
-//
-//  public function called by page_start to tell us to skip splash page.
-// Note: Animation routines should be moved out of this module into
-//       page_start module...
-// ----------------------------------------------------------------------------
-void tf_skip_start_page() {
-
-	tf_skip_start = true;
-
-}
 
 // ----------------------------------------------------------------------------
 //				handle_tick()
@@ -165,70 +146,28 @@ void tf_skip_start_page() {
 
 void handle_tick(AppContextRef ctx, PebbleTickEvent *t) {
 	
+// these call are processed once per minute
 	feature_calc_tick();					// despatch tick events
-	feature_stop_tick();					// to individual functions
-	feature_timer_tick();					//
-	feature_analog_tick();					//
-	feature_simplicity_tick(ctx, t);				// this executes once per minute
+	feature_stop_tick();					// to individual features
+	feature_timer_tick();					// (calculator, stopwatch and timer)
+	feature_analog_tick();					// now to analog clock module
+	feature_simplicity_tick(ctx, t);		// now to digital clock module
 }
 
 // ----------------------------------------------------------------------------
 //				handle_timer()
 //
 // The following section of code handles despatching timer ticks to the
-// program splash page handler until the maximum number of required ticks
-// is reached or the user pushes any key, at which time the splash page 
-// processing is aborted. This is signaled by setting the tf_skip_start
-// flag in the Splash Page Window click handlers.
+// program splash page handler. This later module will track animation
+// progress and stop the timer once it's done.
 //
-//  Note: This section should probably me moved off to the page_start.c
-//        module and serviced by a call from handle_timer() to
-//        that module. 
 // ----------------------------------------------------------------------------
 void handle_timer(AppContextRef ctx, AppTimerHandle handle, uint32_t cookie) {
 	
-	app_timer_cancel_event(tf_app_context, tf_timer);	// no more ticks, please
-
-	if(tf_splash_done) {	// error handler in case we miss a timer tick
-		return;
-	}
-	if((tf_skip_start) && !(tf_splash_done)) {	//  flag set by click handlers in page_start module
-		finish_splash_page();
-		return;
-	}
-
-// else we be animating...
-	if(tf_tick_count < NUMBER_OF_IMAGES) {  // animate graphics
-		page_start_tick(tf_tick_count++);
-		tf_timer = app_timer_send_event(tf_app_context, 250, 42);
-	}
-	else if(tf_tick_count < (NUMBER_OF_IMAGES + 3)) {  // animate graphics
-		page_start_tick(tf_tick_count++);
-		tf_timer = app_timer_send_event(tf_app_context, 1200, 42);
-	}
-	else {
-		finish_splash_page();	// clean up & display program menu window
-	}
+	handle_page_start_timer();
 
 }  // handle_timer()
 
-// ----------------------------------------------------------------------------
-//				finish_splash_page()
-//
-//       private helper function for timer tick routine
-//       performs clean up when splash page done. 
-// ----------------------------------------------------------------------------
-static void finish_splash_page() {
-	
-	feature_calc_reset();		// clean up calculator's tick counter
-								// (was being incremented by opening ticks)
-	menu_program_show_page();	// now show program menu window and
-	page_start_cleanup();		// remove splash page window from stack
-
-	tf_skip_start = true;		//
-	tf_splash_done = true;		// flag to indicate splash page done
-
-}  // finish_splash_page()
 
 // --------------------------------------------------------
 //			handle_init()
@@ -248,6 +187,8 @@ void handle_init(AppContextRef ctx) {
 
 // ----------------------------------------------
 // set up arrays of images for animated logos
+//   (in theory, these could/should move
+//         to individual modules)
 // ----------------------------------------------
 
 //  Set up to access the animation image resources
@@ -261,6 +202,9 @@ void handle_init(AppContextRef ctx) {
         bmp_init_container(IMAGE_RESOURCE_IDS[i], &calc_logo_data.image_container[i]);
         bmp_init_container(IMAGE_RESOURCE_IDS[i], &stop_logo_data.image_container[i]);
         bmp_init_container(IMAGE_RESOURCE_IDS[i], &timer_logo_data.image_container[i]);
+	}
+	
+		for(int i = 0; i < NUMBER_OF_LARGE_IMAGES; i++){
         bmp_init_container(IMAGE_RESOURCE_LARGE_IDS[i], &page_start_logo_data.image_container[i]);
 	}
 
@@ -288,22 +232,20 @@ void handle_init(AppContextRef ctx) {
 //	menu_settings_init();			// (reserved for future use)
 //	menu_defaults_init();			// r(eserved for future use)
 
-
 //   init program support pages modules
-	page_start_init();				// init start page
 	page_about_init();				// init about page
 	page_help_init();				// init page
-//	page_timer_init();				//
-
+	page_start_init();				// init start page
 	
-// and now launch the program via the splash page
-	page_start_show_page();
 
-// and start the splash pager timer
-	tf_timer = app_timer_send_event(tf_app_context, 1000, 42);
+// and now launch the program splash page
+	page_start_show_window();
+
+// and start the splash page timer
+	page_start_timer_start();
+
 
 }  // handle_init()
-
 
 // --------------------------------------------------------
 //			handle_deinit()
@@ -311,10 +253,13 @@ void handle_init(AppContextRef ctx) {
 
 void handle_deinit() {
 // clean up logo containers
-	for(int i = 0; i< NUMBER_OF_IMAGES; i++){
+	for(int i = 0; i < NUMBER_OF_IMAGES; i++){
 		bmp_deinit_container(&calc_logo_data.image_container[i]);
 		bmp_deinit_container(&stop_logo_data.image_container[i]);
 		bmp_deinit_container(&timer_logo_data.image_container[i]);
+	}
+
+	for(int i = 0; i < NUMBER_OF_LARGE_IMAGES; i++){
 		bmp_deinit_container(&page_start_logo_data.image_container[i]);
 	}
 
